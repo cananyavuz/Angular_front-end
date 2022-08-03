@@ -1,0 +1,29 @@
+.product{
+    background-color: #fff;
+    box-shadow: 0 0 3px rgba(0,0,0,0.2);
+    min-height: 350px;
+    padding: 15px;
+}
+.product_image{
+    width: 100%;
+   min-height: 200px;
+    background-color: rgba(0,0,0,0.2);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.product_image img{
+    width: 100%;
+
+}
+.product_title{
+    font-size: 1.6em;
+}
+.product_brand{
+    font-size: 1em;
+    color: rgba(0,0,0,0.8);
+}
+.product_price{
+    font-size: 1.6em;
+    font-weight: bold;
+}

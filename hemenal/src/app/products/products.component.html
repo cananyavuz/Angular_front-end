@@ -1,0 +1,49 @@
+<div class="alert alert-primary">
+    <!--FormModule eklenmesi gerek(import) app.module dosyasına-->
+    <input type="text" class= "form-control" placeholder="Aranacak Kelime" [(ngModel)]="searchKey">
+    <!--kullanıcı inputa yazı yazmak için girmediğinde görünmesini istemiyorum-->
+    <div class="mt-3" *ngIf="searchKey"> Aranan Kelime: {{searchKey}}</div>
+</div>
+
+<ng-template [ngTemplateOutlet]="productsList"></ng-template>
+<ng-template [ngTemplateOutlet]="popularProductsList"></ng-template>
+
+<ng-template #productsList>
+<div class="alert alert-warning" *ngIf="searchKey == '' ">{{products.length}} Adet Ürün Gösteriliyor</div>
+<div class="row">
+    <h1>Ürünler</h1>
+    <div class="col-lg-4 mb-4" *ngFor="let item of products |products:searchKey">
+        <div class="product h-100">
+            <div class="product_image" style="background-image: url(assets/img/{{item.imageUrl}})"></div>
+            <!--pipe değeri alır, bazı parametrelerle kendi içerisinde değiştirip tekrar döndürüyor (summary bir pipe'tır)-->
+            <div class="product_brand">{{item.brand | uppercase}}</div>
+            <div class="product_title">{{item.title | summary:30}}</div>
+            <div class="product_price">{{item.price | currency:'TRY'}}</div>
+            <div class="d-grid gap-2 mx-auto">
+                <button class="btn btn-success" (click)="addToChart($event, item)">SEPETE EKLE</button>
+                <button class="btn btn-warning">DETAY</button>
+            </div>
+        </div>
+    </div>
+</div>
+</ng-template>
+
+<ng-template #popularProductsList>
+    <div class="alert alert-warning">{{popularProduct.length}} Adet Ürün Gösteriliyor</div>
+    <div class="row">
+        <h1>Çok Satanlar</h1>
+        <div class="col-lg-6 mb-4" *ngFor="let item of popularProduct">
+            <div class="product h-100">
+                <div class="product_image" style="background-image: url(assets/img/{{item.imageUrl}})"></div>
+                <!--pipe değeri alır, bazı parametrelerle kendi içerisinde değiştirip tekrar döndürüyor (summary bir pipe'tır)-->
+                <div class="product_brand">{{item.brand | uppercase}}</div>
+                <div class="product_title">{{item.title | summary:30}}</div>
+                <div class="product_price">{{item.price | currency:'TRY'}}</div>
+                <div class="d-grid gap-2 mx-auto">
+                    <button class="btn btn-success">SEPETE EKLE</button>
+                    <button class="btn btn-warning">DETAY</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>
